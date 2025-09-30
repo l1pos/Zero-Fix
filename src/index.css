@@ -1,0 +1,11 @@
+/* src/index.css (ФРАГМЕНТ) */
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    /* ✅ Убеждаемся, что высота 100vh и прокрутка отключена */
+    min-height: 100vh; 
+    overflow: hidden; 
+    overflow-x: hidden; 
+    font-family: 'Poppins', sans-serif; 
+}
