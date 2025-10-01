@@ -1,91 +1,50 @@
-/* src/App.css */
+/* --- СТИЛИ ДЛЯ ПОДПИСИ (НИЖНИЙ ПРАВЫЙ УГОЛ) --- */
 
-/* 1. Контейнер-обертка */
-.main-app-container {
-    height: 100vh; 
-    width: 100vw;
-    overflow: hidden; 
-}
-
-/* 2. Контейнер, который двигается горизонтально */
-.horizontal-scroll-wrapper {
-    display: flex;       
-    width: 300vw;        /* 3 секции * 100vw = 300vw */
-    height: 100vh;
-    /* КЛЮЧ: По умолчанию фиксируем его на экране, скролла нет */
-    position: fixed; 
-    top: 0;
-    left: 0;
-    will-change: transform; /* Оптимизация анимации */
-}
-
-/* 3. Каждая "Картина" (Секция) */
-.scroll-panel {
-    width: 100vw;        
-    height: 100vh;
-    flex-shrink: 0;      
-    position: relative; 
+.hero-signature {
+    /* Абсолютное позиционирование относительно .hero-overlay */
+    position: absolute; 
+    
+    /* Размещаем в нижнем правом углу */
+    bottom: 20px; 
+    right: 20px; 
+    
     display: flex;
-    justify-content: center;
     align-items: center;
-    overflow: hidden;
-    background-color: transparent;
-}
-
-/* Стили Видео Фона */
-.hero-video {
-    position: fixed; /* ГЛАВНОЕ: закрепляет видео на месте */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;     
-    object-fit: cover; 
-    transform-origin: center center; 
-}
-
-.hero-title {
-    font-size: 10rem; 
-    font-weight: 700;
-    color: #ffffff;
-    z-index: 10;     
+    gap: 10px; /* Расстояние между лого и текстом */
+    
+    color: #ffffff; /* Белый текст */
+    font-size: 10px; /* Тонкий шрифт */
     text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6; /* Слегка приглушаем для ненавязчивости */
+    font-family: sans-serif; 
+
+    /* Анимация появления с задержкой, чтобы появилась в конце */
+    opacity: 0; 
+    animation: fadeInUp 2s ease-out 3s forwards; 
 }
 
-/* Стили Кнопки */
-.start-button {
-    position: absolute;
-    bottom: 50px;
-    padding: 15px 30px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid white;
-    cursor: pointer;
-    font-size: 1rem;
-    z-index: 10;
-    transition: background 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
+/* Стили для заполнителя логотипа */
+.logo-placeholder {
+    display: inline-block;
+    width: 16px; /* Ширина вашего логотипа */
+    height: 16px; /* Высота вашего логотипа */
+    /* Здесь вы можете использовать background-image для настоящего логотипа */
+    background-color: #3fdc77; /* Пример: небольшой акцентный квадрат */
+    color: transparent; /* Скрываем текст "LOGO" */
+    border-radius: 50%;
 }
 
-.start-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* ... (Стили HallSection) ... */
-.hall-section {
-    z-index: 10;
-    flex-direction: column;
-    text-align: center;
-    padding: 0 5vw;
-}
-.hall-title {
-    font-size: 5rem;
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1;
-}
-.hall-content-wrapper {
-    position: relative;
-    z-index: 20; 
+/* --- АДАПТИВНОСТЬ: Корректируем для мобильных --- */
+@media (max-width: 768px) {
+    .hero-signature {
+        bottom: 15px;
+        right: 15px;
+        font-size: 8px;
+        gap: 5px;
+    }
+    .logo-placeholder {
+        width: 12px;
+        height: 12px;
+    }
 }

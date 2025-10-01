@@ -1,0 +1,251 @@
+/* src/components/Hero.css */
+
+/* --- БАЗОВЫЕ СТИЛИ --- */
+body {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh; 
+    overflow: hidden; /* КЛЮЧЕВО: Отключает прокрутку для всего сайта */
+    overflow-x: hidden; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+/* --- ОСНОВНЫЕ КОНТЕЙНЕРЫ --- */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: relative; 
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    padding: 0 20px;
+}
+
+/* --- СТИЛИ ДЛЯ ЗАГОЛОВКА (HERO-HEADING) --- */
+
+.hero-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    font-family: 'serif'; 
+    
+    opacity: 0; 
+    animation: fadeInUp 2s ease-out 0.5s forwards;
+    will-change: transform;
+}
+
+.line-top {
+    display: flex;
+    align-items: baseline; 
+    justify-content: center;
+    gap: 8px; 
+}
+
+/* Общие стили для маленьких слов */
+.small-the, 
+.small-off {
+    font-size: 24px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-weight: 300;
+    opacity: 1;
+    color: #8e00aaf6; 
+    line-height: 1; 
+    position: relative; 
+    margin: 0; 
+    /* Тонкий контур */
+    text-shadow: 
+       0.5px 0.5px 0 #000000, 
+        -0.5px 0.5px 0 #000, 
+        0.5px -0.5px 0 #000,
+        -0.5px -0.5px 0 #000;
+
+}
+
+.small-the { 
+    top: -40px; 
+}
+
+.small-off { 
+    top: 0px; 
+}
+
+
+/* Стили для большого текста */
+.big-text {
+    font-size: 80px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0; 
+    line-height: 1; 
+    /* Четкий контур */
+    text-shadow: 
+        1px 1px 0 #000, 
+        -1px 1px 0 #000000, 
+        1px -1px 0 #000000,
+        -1px -1px 0 #000000;
+
+}
+
+.bottom-text {
+    margin-top: 20px;
+    font-size: 72px;
+}
+
+/* --- КОНТЕЙНЕР ДЛЯ ЦЕНТРИРОВАНИЯ ПОДПИСИ (НОВЫЙ БЛОК) --- */
+.hero-signature-container {
+    position: absolute; 
+    bottom: 20px; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; /* Центрирует подпись по горизонтали */
+    pointer-events: none; /* Позволяет кликать сквозь контейнер */
+}
+
+
+/* --- СТИЛИ ДЛЯ ПОДПИСИ (БЕЗ ФОНА И РАМКИ) --- */
+
+.hero-signature {
+    /* Удалены позиционирование и фон/рамка/отступы */
+    position: static; 
+    
+    display: flex;
+    align-items: center;
+    
+    background-color: transparent; /* Убран фон */
+    border: none; /* Убрана рамка */
+    padding: 0; /* Убраны отступы */
+    border-radius: 0; 
+    
+    color: #ffffff; 
+    font-size: 10px; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6; 
+    font-family: sans-serif; 
+
+    opacity: 0; 
+    animation: fadeInUp 2s ease-out 3s forwards; 
+
+    pointer-events: auto; /* Включаем взаимодействие с содержимым */
+}
+
+/* Стили для Логотипа (первая колонка) */
+.signature-logo {
+    display: block;
+    height: 40px; 
+    width: auto; 
+    margin-right: 15px; 
+    
+    filter: invert(100%); 
+}
+
+/* Стили для текста (вторая колонка) */
+.copyright-text {
+    border-left: 1px solid #555; 
+    padding-left: 15px; 
+    line-height: 1; 
+}
+
+/* --- СТИЛИ ДЛЯ КНОПКИ И АНИМАЦИИ --- */
+
+.start-button {
+    margin-top: 50px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background-color: rgba(255, 255, 255, 0); 
+    border: 2px solid #fff; 
+    border-radius: 5px; 
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    opacity: 0; 
+    animation: fadeInUp 2s ease-out 2.5s forwards;
+}
+
+.start-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
+/* Ключевые кадры для анимации появления */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- АДАПТИВНОСТЬ --- */
+
+@media (max-width: 768px) {
+    .hero-heading .big-text {
+        font-size: 48px; 
+        line-height: 1;
+    }
+    .hero-heading .bottom-text {
+        font-size: 42px;
+        margin-top: 15px;
+    }
+    .line-top {
+        gap: 5px;
+    }
+    
+    .small-the, .small-off {
+        font-size: 10px;
+        letter-spacing: 4px;
+        position: relative; 
+        top: 0; 
+    }
+    .small-the {
+        top: -12px; 
+    }
+    .small-off {
+        top: 3px; 
+    }
+
+    .hero-signature-container {
+        bottom: 15px;
+    }
+    
+    .hero-signature {
+        padding: 0; 
+        font-size: 8px;
+    }
+    .signature-logo {
+        height: 30px; 
+        margin-right: 10px; 
+    }
+    .copyright-text {
+        padding-left: 10px;
+    }
+}

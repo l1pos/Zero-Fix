@@ -1,0 +1,33 @@
+/* src/components/Section.css */
+
+.hall-section {
+    width: 100%;
+    height: 100vh;
+    background-color: #000000; /* Черный фон для второй сцены */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    /* Убедимся, что новая сцена всегда сверху */
+    z-index: 10; 
+    color: white;
+    padding: 20px;
+}
+
+.hall-content {
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hall-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #8e00aaf6; /* Используем акцентный цвет */
+}
+
+.hall-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}

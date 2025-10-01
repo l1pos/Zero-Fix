@@ -1,56 +1,42 @@
 // src/components/Section.jsx
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { gsap } from 'gsap';
+import './Section.css'; // Импортируем стили для этой секции
 
-const HallSection = () => {
-    // 1. ПРАВИЛЬНОЕ ОБЪЯВЛЕНИЕ REFS
-    const sectionRef = useRef(null); 
-    const titleRef = useRef(null);
-    
-    useEffect(() => {
-        // Проверка: убедиться, что элементы существуют
-        if (!sectionRef.current || !titleRef.current) return;
-        
-        const ctx = gsap.context(() => {
-            // Анимация: Выезд текста снизу при появлении секции
-            gsap.fromTo(titleRef.current, 
-                { y: 100, opacity: 0 }, 
-                { 
-                    y: 0, 
-                    opacity: 1, 
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        // Начать, когда левый край секции достигнет центра окна
-                        start: "left center", 
-                        end: "center center", 
-                        scrub: 1, 
-                    },
-                }
+// Используем forwardRef, чтобы App.jsx мог получить ссылку (ref) на этот компонент
+const HallSection = forwardRef((props, ref) => {
+    const contentRef = useRef(null);
+
+    // Предоставляем функцию, чтобы App.jsx мог запустить анимацию появления
+    useImperativeHandle(ref, () => ({
+        // Анимация, которую вызывает App.jsx, когда sceneState меняется на 'hall'
+        animateIn: () => {
+            gsap.fromTo(contentRef.current, 
+                // Начальное состояние (за экраном или невидимое)
+                { opacity: 0, y: 50 }, 
+                // Конечное состояние (появляется и сдвигается вверх)
+                { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" }
             );
-        }, sectionRef);
-
-        return () => ctx.revert();
+        }
+    }));
+    
+    // Начальное скрытие контента при монтировании, 
+    // чтобы анимация "animateIn" могла его показать
+    useEffect(() => {
+        gsap.set(contentRef.current, { opacity: 0 });
     }, []);
 
     return (
-        // 2. ПРИСВОЕНИЕ REFS В JSX
-        <section ref={sectionRef} className="hall-section scroll-panel">
-            <div className="hall-content-wrapper">
-                <h2 ref={titleRef} className="hall-title serif-accent">
-                    The Hall of
-                </h2>
-                <h3 className="hall-title serif-accent" style={{ fontSize: '3rem' }}>
-                    Infinite Potential
-                </h3>
-                <p className="subtitle ui-control-text">
-                    Inspired by the great nation of Wakanda.
-                </p>
+        // Располагаем компонент абсолютно, чтобы он занимал весь экран
+        <section className="hall-section" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+            <div ref={contentRef} className="hall-content">
+                <h1 style={{color: 'white', fontSize: '3em'}}>СЦЕНА 2: НОВАЯ ГЛАВА</h1>
+                <p style={{color: 'lightgray'}}>Добро пожаловать. Это контент, который появляется после анимационного перехода с первого экрана.</p>
+                {/* Добавьте здесь остальной контент вашей второй сцены */}
             </div>
         </section>
     );
-};
+});
 
 export default HallSection;
