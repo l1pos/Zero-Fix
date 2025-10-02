@@ -1,14 +1,19 @@
 # Node dependencies
 /node_modules
 /dist
+/build
+
+# Config and Environment
 .env
 .env.*
 .npm
-npm-debug.log
-yarn-error.log
+.vscode/
 
 # Logs and system files
 .DS_Store
+*.log
+npm-debug.log
+yarn-error.log
 
 # VITE specific
 .vite/

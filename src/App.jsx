@@ -1,52 +1,92 @@
 // src/App.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
 import './App.css'; 
-import Hero from './components/Hero.jsx'; // Сцена 1
-import HallSection from './components/Section.jsx'; // Сцена 2
+import Hero from './components/Hero.jsx'; 
+import HallSection from './components/Section.jsx'; 
+import ExtraSection from './components/ExtraSection.jsx'; 
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  // Состояние: 'intro' (по умолчанию) или 'hall' (после клика)
   const [sceneState, setSceneState] = useState('intro'); 
-  const heroRef = useRef(null); // Ref для вызова анимаций Hero
-  const hallRef = useRef(null); // Ref для вызова анимаций HallSection
-
-  // Ключевой эффект: Гарантирует, что скролл всегда отключен
+  const heroRef = useRef(null); 
+  const scrollContainerRef = useRef(null); 
+  const hallRef = useRef(null); 
+  
+  // Initial lock: disable scroll and reset window position
   useEffect(() => {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden'; 
       window.scrollTo(0, 0); 
   }, []); 
 
-  // Функция, которую Hero вызовет после завершения анимации ухода
-  const handleSceneChange = () => {
-      // 1. Меняем состояние на 'hall'
-      setSceneState('hall');
-      
-      // 2. Запускаем анимацию появления HallSection (если она есть)
-      if (hallRef.current && hallRef.current.animateIn) {
-           hallRef.current.animateIn();
+  // Horizontal Scroll Logic
+  useEffect(() => {
+    
+    if (sceneState !== 'hall' || !scrollContainerRef.current) return;
+
+    // Enable vertical scrolling for ScrollTrigger's pin mechanism
+    document.body.style.overflow = 'auto'; 
+    document.documentElement.style.overflow = 'auto';
+
+    const sections = gsap.utils.toArray(scrollContainerRef.current.children);
+    let totalWidth = 0;
+
+    sections.forEach(section => {
+      totalWidth += section.offsetWidth;
+    });
+
+    // GSAP ScrollTrigger setup for horizontal movement
+    gsap.to(sections, {
+      x: () => -(totalWidth - window.innerWidth), 
+      ease: "none",
+      scrollTrigger: {
+        trigger: scrollContainerRef.current,
+        pin: true, 
+        scrub: 0.5, 
+        end: () => "+=" + (totalWidth - window.innerWidth + 50),
       }
-  };
+    });
 
-  // Функция для запуска анимации перехода
-  const handleStartTransition = () => {
-    if (heroRef.current) {
-        // Запускаем функцию анимации из Hero.jsx
-        heroRef.current.startVideoZoomAndExit();
+    // Trigger Section 2 'in' animation
+    if (hallRef.current && hallRef.current.animateIn) {
+        hallRef.current.animateIn();
     }
+    
+    // Cleanup: reset scroll lock
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+      document.body.style.overflow = 'hidden'; 
+      document.documentElement.style.overflow = 'hidden';
+    };
+
+  }, [sceneState]);
+
+  // Handler called after Hero exit animation
+  const handleSceneChange = () => {
+      setSceneState('hall');
   };
 
-  // Стиль для контейнера, который гарантирует 100% видимого экрана
-  const sceneContainerStyle = {
+  const appStyle = {
     position: 'relative', 
-    height: '100vh', 
+    height: sceneState === 'intro' ? '100vh' : 'auto', 
     width: '100vw', 
-    overflow: 'hidden'
+    overflow: 'hidden' 
+  };
+
+  const horizontalScrollStyle = {
+    display: 'flex',
+    flexWrap: 'nowrap', 
+    width: 'fit-content' // Crucial for horizontal layout
   };
 
   return (
-    <div className="App" style={sceneContainerStyle}>
-      {/* 1. Сцена Hero (отображается, пока state === 'intro') */}
+    <div className="App" style={appStyle}>
+      
+      {/* Scene 1: Hero Intro */}
       {sceneState === 'intro' && (
           <Hero 
             ref={heroRef} 
@@ -54,13 +94,15 @@ function App() {
           />
       )}
       
-      {/* 2. Сцена Hall (отображается, когда state === 'hall') */}
+      {/* Scene 2 & 3: Horizontal Scroll Container */}
       {sceneState === 'hall' && (
-          <HallSection 
-             ref={hallRef} 
-          /> 
+        <div ref={scrollContainerRef} style={horizontalScrollStyle}>
+          
+          <HallSection ref={hallRef} /> 
+          <ExtraSection /> 
+          
+        </div>
       )}
-      {/* Если вам нужен компонент HallSection (Section.jsx), убедитесь, что вы его создали! */}
     </div>
   );
 }

@@ -44,7 +44,8 @@
 .employee-cards-container {
     display: flex;
     justify-content: center;
-    gap: 40px; 
+    /* УВЕЛИЧЕННОЕ РАССТОЯНИЕ */
+    gap: 50px 50px; 
     flex-wrap: wrap;
     margin-top: 20px;
 }
@@ -64,6 +65,7 @@
     /* Default neon effect */
     box-shadow: 0 0 10px rgba(142, 0, 170, 0.4); 
     position: relative;
+    cursor: pointer;
 }
 
 .employee-card:hover {
@@ -130,13 +132,10 @@
         margin-bottom: 30px;
     }
     
-.employee-cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 50px 50px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-}
+    .employee-cards-container {
+        flex-direction: column;
+        gap: 20px;
+    }
     
     .employee-card {
         width: 100%;

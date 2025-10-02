@@ -1,50 +1,42 @@
-/* --- СТИЛИ ДЛЯ ПОДПИСИ (НИЖНИЙ ПРАВЫЙ УГОЛ) --- */
+/* src/App.css */
 
-.hero-signature {
-    /* Абсолютное позиционирование относительно .hero-overlay */
-    position: absolute; 
-    
-    /* Размещаем в нижнем правом углу */
-    bottom: 20px; 
-    right: 20px; 
-    
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Расстояние между лого и текстом */
-    
-    color: #ffffff; /* Белый текст */
-    font-size: 10px; /* Тонкий шрифт */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6; /* Слегка приглушаем для ненавязчивости */
-    font-family: sans-serif; 
-
-    /* Анимация появления с задержкой, чтобы появилась в конце */
-    opacity: 0; 
-    animation: fadeInUp 2s ease-out 3s forwards; 
+/* --- GLOBAL RESET: Fixes top margin on Hero screen --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Стили для заполнителя логотипа */
-.logo-placeholder {
-    display: inline-block;
-    width: 16px; /* Ширина вашего логотипа */
-    height: 16px; /* Высота вашего логотипа */
-    /* Здесь вы можете использовать background-image для настоящего логотипа */
-    background-color: #3fdc77; /* Пример: небольшой акцентный квадрат */
-    color: transparent; /* Скрываем текст "LOGO" */
-    border-radius: 50%;
+/* Ensure body and html are full width/height */
+html, body {
+    width: 100%;
+    min-height: 100%;
 }
 
-/* --- АДАПТИВНОСТЬ: Корректируем для мобильных --- */
-@media (max-width: 768px) {
-    .hero-signature {
-        bottom: 15px;
-        right: 15px;
-        font-size: 8px;
-        gap: 5px;
-    }
-    .logo-placeholder {
-        width: 12px;
-        height: 12px;
-    }
+/* --- SCROLLBAR HIDING: Must be aggressive to work in Chrome (Webkit) --- */
+
+/* Chrome, Safari, Opera (Webkit) */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important; 
+    height: 0 !important;
 }
+
+/* Firefox */
+body, html {
+    scrollbar-width: none !important; 
+}
+
+/* IE and Edge */
+body, html {
+    -ms-overflow-style: none !important;
+}
+
+/* --- BASE STYLES --- */
+.App {
+    background-color: #000;
+    font-family: 'Poppins', sans-serif; 
+}
+
+/* Add other custom styles here if needed */

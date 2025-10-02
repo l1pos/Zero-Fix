@@ -6,16 +6,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9); /* Темный полупрозрачный фон */
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100; /* Должен быть выше всего остального */
-    backdrop-filter: blur(5px); /* Небольшое размытие для стиля */
+    z-index: 100;
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: #1a0028; /* Темный фон для модального окна */
+    background-color: #1a0028;
     border: 1px solid #8e00aaf6;
     border-radius: 10px;
     padding: 30px;
@@ -23,9 +23,9 @@
     max-width: 500px;
     color: #ffffff;
     position: relative;
-    /* Неоновый эффект */
+    /* Neon effect */
     box-shadow: 0 0 20px rgba(142, 0, 170, 0.7); 
-    animation: modalIn 0.3s ease-out; /* Анимация появления */
+    animation: modalIn 0.3s ease-out;
 }
 
 @keyframes modalIn {
@@ -47,7 +47,7 @@
 }
 
 .modal-close:hover {
-    color: #3fdc77; /* Акцентный цвет при наведении */
+    color: #3fdc77;
 }
 
 .modal-header {
@@ -61,7 +61,7 @@
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
-    /* Неоновая рамка для фото */
+    /* Neon border for photo */
     box-shadow: 0 0 10px #8e00aaf6, inset 0 0 10px #8e00aaf6;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .modal-body h3 {
-    color: #3fdc77; /* Акцентный цвет для заголовка Bio */
+    color: #3fdc77;
     margin-bottom: 10px;
     border-bottom: 1px dashed #3fdc7733;
     padding-bottom: 5px;
