@@ -39,7 +39,7 @@ const Hero = forwardRef(({ onStartClick }, ref) => {
   return (
     <section className="hero">
       <video ref={videoRef} className="hero-video" autoPlay loop muted playsInline> 
-        <source src="./background-main.mp4" type="video/mp4" />
+        <source src="/background-main.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -67,7 +67,7 @@ const Hero = forwardRef(({ onStartClick }, ref) => {
         {/* Signature/Copyright Container */}
         <div className="hero-signature-container">
             <div className="hero-signature">
-                <img src="./logo-company.png" alt="Company Logo" className="signature-logo" />
+                <img src="/logo-company.png" alt="Company Logo" className="signature-logo" />
                 <span className="copyright-text">Ⓒ Out of The Box Systems</span>
             </div>
         </div>
