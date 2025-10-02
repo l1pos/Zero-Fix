@@ -65,19 +65,19 @@ const HallSection = forwardRef((props, ref) => {
         { 
             name: "Alex", 
             title: "Frontend Developer", 
-            imageUrl: "/frontend-dev.jpg",
+            imageUrl: "./frontend-dev.jpg",
             bio: "Alex is the core architect of our interfaces, specializing in React and GSAP. His passion for smooth, performance-driven user experiences ensures every interaction is flawless and intuitive."
         },
         { 
             name: "Victoria", 
             title: "HR Manager", 
-            imageUrl: "/hr-png.jpg",
+            imageUrl: "./hr-png.jpg",
             bio: "Victoria is the guardian of our corporate culture, ensuring we attract and retain top talent. She manages the collective's well-being and drives our diversity and inclusion initiatives."
         },
         { 
             name: "Ivan", 
             title: "Rust Developer", 
-            imageUrl: "/rust-devolper.jpg",
+            imageUrl: "./rust-devolper.jpg",
             bio: "Ivan builds high-performance, low-latency backends using Rust. His expertise in systems programming is the backbone of our 'Zero Limits' capability, ensuring speed and reliability."
         },
     ];
