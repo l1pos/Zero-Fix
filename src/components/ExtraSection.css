@@ -1,0 +1,24 @@
+/* src/components/ExtraSection.css */
+
+.extra-section-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    /* Фоновый градиент или цвет */
+    background: radial-gradient(circle at center, rgba(142, 0, 170, 0.1) 0%, rgba(0, 0, 0, 1) 70%);
+}
+
+.extra-section-title {
+    font-size: 2rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    opacity: 0; /* Изначально скрыт, чтобы показать через GSAP */
+    padding: 0 20px;
+}
